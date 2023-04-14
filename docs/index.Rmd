@@ -1,0 +1,166 @@
+---
+title: 'RELATÓRIO DE DISCIPLINAS OPTATIVAS </br> 2023.01'
+subtitle: 'CONSELHO DIRETOR DO IEPG'
+author: 'Prof. Victor Valerio'
+date: 'Última atualização: `r format(Sys.Date(),"%d-%m-%Y")`'
+output:
+  xaringan::moon_reader:
+    css: ['default', 'meutema.css']
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_light(base_color = '#23395b')
+```
+
+```{r xaringan-scribble, echo=FALSE}
+xaringanExtra::use_scribble()
+xaringanExtra::use_search(show_icon = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+source('../scripts//tabela_dados.R')
+```
+
+# DISCIPLINAS OFERTADAS
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+library(magrittr)
+library(ggplot2)
+
+g1 <- dados %>% 
+  dplyr::group_by(area) %>% 
+  dplyr::summarise(quantidade = dplyr::n(),
+                   ch = sum(ch),
+                   vagas = sum(vagas),
+                   matriculados = sum(matriculados)) %>% 
+  dplyr::mutate(area = forcats::fct_reorder(area, quantidade)) %>% 
+  ggplot(mapping = aes(
+    group = 1,
+    text = paste('Valor: ', quantidade))) + 
+  geom_col(mapping = aes(x = quantidade, y = area),
+           fill = '#2e7bcf',
+           alpha = 0.8) + 
+  labs(y = '',
+       x = 'DISCIPLINAS OFERTADAS') +
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 title_font_size = 20)
+
+g1 <- plotly::ggplotly(g1,
+                       tooltip = c('text'))
+
+widgetframe::frameWidget(g1, width = '100%', height = '100%')
+
+```
+
+---
+# CARGA HORÁRIA
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+library(magrittr)
+library(ggplot2)
+
+g2 <- dados %>% 
+  dplyr::group_by(area) %>% 
+  dplyr::summarise(quantidade = dplyr::n(),
+                   ch = sum(ch),
+                   vagas = sum(vagas),
+                   matriculados = sum(matriculados)) %>% 
+  dplyr::mutate(area = forcats::fct_reorder(area, ch)) %>% 
+  ggplot(mapping = aes(
+    group = 1,
+    text = paste('Valor: ', ch))) + 
+  geom_col(mapping = aes(x = ch, y = area),
+           fill = '#2e7bcf',
+           alpha = 0.8) + 
+  labs(y = '',
+       x = 'CARGA HORÁRIA') +
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 title_font_size = 20)
+
+g2 <- plotly::ggplotly(g2,
+                       tooltip = c('text'))
+
+widgetframe::frameWidget(g2, width = '100%', height = '100%')
+```
+
+---
+# VAGAS DISPONIBILIZADAS
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+library(magrittr)
+library(ggplot2)
+
+g3 <- dados %>% 
+  dplyr::group_by(area) %>% 
+  dplyr::summarise(quantidade = dplyr::n(),
+                   ch = sum(ch),
+                   vagas = sum(vagas),
+                   matriculados = sum(matriculados)) %>% 
+  dplyr::mutate(area = forcats::fct_reorder(area, vagas)) %>% 
+  ggplot(mapping = aes(
+    group = 1,
+    text = paste('Valor: ', vagas))) + 
+  geom_col(mapping = aes(x = vagas, y = area),
+           fill = '#2e7bcf',
+           alpha = 0.8) + 
+  labs(y = '',
+       x = 'VAGAS DISPONIBILIZADAS') +
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 title_font_size = 20)
+
+g3 <- plotly::ggplotly(g3,
+                       tooltip = c('text'))
+
+widgetframe::frameWidget(g3, width = '100%', height = '100%')
+```
+
+---
+
+# ESTUDANTES MATRICULADOS
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+library(magrittr)
+library(ggplot2)
+
+g4 <- dados %>% 
+  dplyr::group_by(area) %>% 
+  dplyr::summarise(quantidade = dplyr::n(),
+                   ch = sum(ch),
+                   vagas = sum(vagas),
+                   matriculados = sum(matriculados)) %>% 
+  dplyr::mutate(area = forcats::fct_reorder(area, matriculados)) %>% 
+  ggplot(mapping = aes(
+    group = 1,
+    text = paste('Valor: ', matriculados))) + 
+  geom_col(mapping = aes(x = matriculados, y = area),
+           fill = '#2e7bcf',
+           alpha = 0.8) + 
+  labs(y = '',
+       x = 'ESTUDANTES MATRICULADOS') +
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 title_font_size = 20)
+
+g4 <- plotly::ggplotly(g4,
+                       tooltip = c('text'))
+
+widgetframe::frameWidget(g4, width = '100%', height = '100%')
+```
+
+
+
+
+
+
+
+
+
+
